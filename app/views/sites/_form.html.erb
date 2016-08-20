@@ -1,0 +1,50 @@
+<%= form_for(site) do |f| %>
+  <% if site.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(site.errors.count, "error") %> prohibited this site from being saved:</h2>
+
+      <ul>
+      <% site.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-top: 5%; margin-left: 40%">
+
+  <div class="field">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tags %>
+    <%= f.text_area :tags %>
+  </div>
+
+  <div class="field">
+    <%= f.label :logo_url %>
+    <%= f.text_field :logo_url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :theme_id %>
+    <%= f.text_field :theme_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :menu_id %>
+    <%= f.text_field :menu_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :temp_id %>
+    <%= f.text_field :temp_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+  </div>
+<% end %>
