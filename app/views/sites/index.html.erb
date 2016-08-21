@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 <div style="margin-top: 5%; margin-left: 40%">
 <h1>Sites</h1>
-
+<h2><%= flash[:alert] %></h2>
 <table>
   <thead>
     <tr>
@@ -25,8 +25,12 @@
         <td><%= site.menu_id %></td>
         <td><%= site.temp_id %></td>
         <td><%= link_to 'Show', site %></td>
+        <% if can? :update, site %>
         <td><%= link_to 'Edit', edit_site_path(site) %></td>
+            <% end %>
+        <% if can? :destroy, site %>
         <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
       </tr>
     <% end %>
   </tbody>

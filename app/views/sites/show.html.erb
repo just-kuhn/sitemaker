@@ -30,5 +30,9 @@
   <%= @site.temp %>
 </p>
 
-<%= link_to 'Edit', edit_site_path(@site) %> |
+<% if can? :update, @site %>
+<%= link_to 'Edit', edit_site_path(@site) %>
+    <% end %>
+<% if can? :destroy, @site %>
 <%= link_to 'Back', sites_path %>
+    <% end %>

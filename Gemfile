@@ -32,7 +32,7 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-twitter'
 gem 'omniauth-facebook'
-
+gem 'cancan'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

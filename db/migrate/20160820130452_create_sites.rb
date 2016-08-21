@@ -8,6 +8,7 @@ class CreateSites < ActiveRecord::Migration[5.0]
       t.belongs_to :menu, foreign_key: true
       t.belongs_to :temp, foreign_key: true
 
+      t.belongs_to :user, foreign_key: true
       t.timestamps
     end
   end

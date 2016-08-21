@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820145658) do
+ActiveRecord::Schema.define(version: 20160821142114) do
 
   create_table "menus", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "menu_image"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160820145658) do
     t.integer  "temp_id"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "user_id"
     t.index ["menu_id"], name: "index_sites_on_menu_id", using: :btree
     t.index ["temp_id"], name: "index_sites_on_temp_id", using: :btree
     t.index ["theme_id"], name: "index_sites_on_theme_id", using: :btree
@@ -62,6 +63,9 @@ ActiveRecord::Schema.define(version: 20160820145658) do
     t.string   "unconfirmed_email"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "provider"
+    t.string   "uid"
+    t.boolean  "admin"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

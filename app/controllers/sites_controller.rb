@@ -20,13 +20,14 @@ class SitesController < ApplicationController
 
   # GET /sites/1/edit
   def edit
+    authorize! :update, @site
   end
 
   # POST /sites
   # POST /sites.json
   def create
-    @site = Site.new(site_params)
-
+    @user = current_user
+    @site = @user.sites.build(site_params)
     respond_to do |format|
       if @site.save
         format.html { redirect_to @site, notice: 'Site was successfully created.' }
@@ -55,6 +56,7 @@ class SitesController < ApplicationController
   # DELETE /sites/1
   # DELETE /sites/1.json
   def destroy
+    authorize! :destroy, @site
     @site.destroy
     respond_to do |format|
       format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
