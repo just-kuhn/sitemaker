@@ -30,19 +30,25 @@
 
   <div class="field">
     <%= f.label :theme_id %>
-    <%= f.text_field :theme_id %>
+    <% Theme.all.each do |theme| %>
+      <%= f.radio_button :theme_id, theme.id %>
+      <%= theme.theme_color %>
+    <% end %>
   </div>
-
-  <div class="field">
-    <%= f.label :menu_id %>
-    <%= f.text_field :menu_id %>
-  </div>
-
-  <div class="field">
-    <%= f.label :temp_id %>
-    <%= f.text_field :temp_id %>
-  </div>
-
+    <div class="field">
+      <%= f.label :temp_id %><br>
+      <% Temp.all.each do |temp| %>
+          <%= f.radio_button :temp_id, temp.id %>
+          <%= image_tag temp.temp_image, style: 'width: 10%; height: 10%;' %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.label :menu_id %><br>
+      <% Menu.all.each do |menu| %>
+          <%= f.radio_button :menu_id, menu.id %>
+          <%= image_tag menu.menu_image, style: 'width: 10%; height: 10%;'%>
+      <% end %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>

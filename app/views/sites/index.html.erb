@@ -1,5 +1,5 @@
 <p id="notice"><%= notice %></p>
-
+<div style="margin-top: 5%; margin-left: 40%">
 <h1>Sites</h1>
 
 <table>
@@ -21,9 +21,9 @@
         <td><%= site.title %></td>
         <td><%= site.tags %></td>
         <td><%= site.logo_url %></td>
-        <td><%= site.theme %></td>
-        <td><%= site.menu %></td>
-        <td><%= site.temp %></td>
+        <td><%= site.theme_id %></td>
+        <td><%= site.menu_id %></td>
+        <td><%= site.temp_id %></td>
         <td><%= link_to 'Show', site %></td>
         <td><%= link_to 'Edit', edit_site_path(site) %></td>
         <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -33,5 +33,7 @@
 </table>
 
 <br>
-
+<% if current_user %>
 <%= link_to 'New Site', new_site_path %>
+      <% end %>
+</div>
