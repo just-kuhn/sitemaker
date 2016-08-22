@@ -1,9 +1,17 @@
 Rails.application.routes.draw do
-  get 'home/index'
+  resources :maps
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+
 
   devise_for :users, controllers: { registrations: 'registrations'}
   root 'sites#index'
-  resources :sites
+  resources :sites do
+    member do
+      put 'like' => 'sites#upvote'
+      put 'dislike' => 'sites#downvote'
+    end
+  end
+
   resources :themes
   resources :temps
   resources :menus

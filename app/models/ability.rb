@@ -7,6 +7,7 @@ class Ability
       can :manage, :all
 
     else
+
       can :update, Site do |site|
         site.user == user
       end
@@ -15,7 +16,7 @@ class Ability
         site.user == user
       end
 
-      can :create, Site
+
     end
 
     # Define abilities for the passed in user here. For example:

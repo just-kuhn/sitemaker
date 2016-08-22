@@ -41,6 +41,8 @@
           <% if user_signed_in? %>
               <li><%= link_to "users/edit" do %><%= current_user.name %><% end %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+              <li><%= link_to 'New Site', new_site_path %></li>
+
           <% else %>
 
               <li><%= link_to "users/sign_in" do%>log in<% end %></li>

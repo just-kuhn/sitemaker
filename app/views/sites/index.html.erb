@@ -1,43 +1,45 @@
 <p id="notice"><%= notice %></p>
-<div style="margin-top: 5%; margin-left: 40%">
-<h1>Sites</h1>
-<h2><%= flash[:alert] %></h2>
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Tags</th>
-      <th>Logo url</th>
-      <th>Theme</th>
-      <th>Menu</th>
-      <th>Temp</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div style="margin-top: 5%">
+  <h2><%= flash[:alert] %></h2>
 
-  <tbody>
     <% @sites.each do |site| %>
-      <tr>
-        <td><%= site.title %></td>
-        <td><%= site.tags %></td>
-        <td><%= site.logo_url %></td>
-        <td><%= site.theme_id %></td>
-        <td><%= site.menu_id %></td>
-        <td><%= site.temp_id %></td>
-        <td><%= link_to 'Show', site %></td>
-        <% if can? :update, site %>
-        <td><%= link_to 'Edit', edit_site_path(site) %></td>
-            <% end %>
-        <% if can? :destroy, site %>
-        <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
-<% if current_user %>
-<%= link_to 'New Site', new_site_path %>
-      <% end %>
+          <div class="col-sm-6 col-md-4">
+
+            <div class="thumbnail thumb-box">
+
+                <h2 style="text-align: center"><%= site.title %></h2>
+                <%= image_tag(site.logo_url, size:'250x300') %>
+
+                <div style="text-align: center">
+                  <%= link_to 'Show', site %>
+                <% if can? :update, site %>
+                  <%= link_to 'Edit', edit_site_path(site) %>
+                <% end %>
+                <% if can? :destroy, site %>
+              <%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% end %>
+                </div>
+                <div class="caption" style="text-align: center">
+                  <%= link_to like_site_path(site), class: 'like', method: :put do %>
+                      <button type="button" class="btn btn-info" aria-label="left-align">
+                        <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidder="true"></span>
+                        <span class="badge"><%= site.get_upvotes.size %></span>
+                      </button>
+                  <% end %>
+
+                  <%= link_to dislike_site_path(site), class: "like", method: :put do %>
+                      <button type="button" class="btn btn-info" aria-label="left-align">
+                        <span class="glyphicon glyphicon-thumbs-down glyphicon-align-center" aria-hidder="true"></span>
+                        <span class="badge"><%= site.get_downvotes.size %></span>
+                      </button>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+
+    <% end %>
+
+  <br>
+
 </div>

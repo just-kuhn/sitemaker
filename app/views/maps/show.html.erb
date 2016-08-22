@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @map.site %>
+</p>
+
+<p>
+  <strong>Element:</strong>
+  <%= @map.element_id %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @map.value %>
+</p>
+
+<%= link_to 'Edit', edit_map_path(@map) %> |
+<%= link_to 'Back', maps_path %>

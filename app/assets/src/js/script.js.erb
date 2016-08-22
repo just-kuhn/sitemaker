@@ -1,0 +1,113 @@
+window.onload = function () {
+    window.onCreate();
+    document.getElementById('inputName').setAttribute('readonly', 'readonly');
+    document.getElementById('inputEmail').setAttribute('readonly', 'readonly');
+    document.getElementById('inputMessage').setAttribute('readonly', 'readonly');
+    document.getElementById('inputButton').setAttribute('disabled', 'disabled');
+    document.getElementById('theMenu').style.marginTop = "50pt";
+
+    /*Theme*/
+    var color = '#D5C9B2';
+    if (theme == 2) {
+        document.getElementById('menu-wrap').setAttribute('style', 'background: ' + color);
+        document.getElementById('style1').innerHTML = '.main .container, #header .container,  #footer .container\{background-color:' + color + ';\}';
+    }
+    window.setValues(window.valuesMap);
+};
+var currentLinkId;
+var theme = window.theme;
+var menuNumber = window.menuNumber;
+var templateNumber = window.templateNumber;
+window.onload();
+
+function onTextDbClick(id) {
+    var el = document.getElementById(id);
+    console.log(el.innerHTML);
+    el.innerHTML = '<textarea rows="' + countOfRows(el.innerHTML) + '" id="inputHuinput" style="width: 100%" onblur="onTextInputBlur('
+        + id + ')">'
+        + el.innerHTML +
+        '</textarea>';
+    document.getElementById('inputHuinput').focus();
+}
+
+function onImgDbClick(id, imgSrc) {
+    var el = document.getElementById(id);
+    imgSrc = document.getElementById(id+"1").src;
+    console.log(el.innerHTML);
+    el.innerHTML = '<div style="height: 109px"><textarea rows="' + 3 + '" id="inputHuinput" style="width: 100%" onblur="onImgInputBlur('
+        + id + ')">'
+        + imgSrc +
+        '</textarea></div>';
+    document.getElementById('inputHuinput').focus();
+}
+
+function onLinkDbClick(id) {
+    currentLinkId = id;
+    console.log('cur:' + currentLinkId);
+    var el = document.getElementById(id);
+    var linkDiv = document.getElementById("linkInputDiv");
+    console.log(el.innerHTML);
+    document.getElementById(id + "1").style.color = '#3CB371';
+    var countOfRows;
+    if (menuNumber == 2) {
+        countOfRows = 1;
+        document.getElementById('menuToggle').style.opacity = 0;
+    }
+    else
+        countOfRows = countOfLinkRows(el.href);
+    linkDiv.innerHTML = '<textarea rows="' + countOfRows + '" id="inputHuinput" style="width: 100%" onblur="onLinkInputBlur()">'
+        + el.href +
+        '</textarea>';
+    document.getElementById('inputHuinput').focus();
+}
+
+function onTextInputBlur(id) {
+    if (id.id == "w3") {
+        document.getElementById('m1').innerHTML = document.getElementById('inputHuinput').value;
+    }
+    if (id.id == "w5") {
+        document.getElementById('m2').innerHTML = document.getElementById('inputHuinput').value;
+    }
+    if (id.id == "w11") {
+        document.getElementById('m3').innerHTML = document.getElementById('inputHuinput').value;
+    }
+    if (id.id == "w13") {
+        document.getElementById('m4').innerHTML = document.getElementById('inputHuinput').value;
+    }
+    console.log(document.getElementById('inputHuinput').value);
+    document.getElementById(id.id).innerHTML = document.getElementById('inputHuinput').value;
+}
+
+function onImgInputBlur(id) {
+    console.log(document.getElementById('inputHuinput').value);
+    var url = document.getElementById('inputHuinput').value;
+    document.getElementById(id.id).innerHTML = '<img ondblclick=\'onImgDbClick("' + id.id + '", "' + url + '")\' src="' + url + '" style="height: 100px; width: 100px">';
+}
+
+function onLinkInputBlur() {
+    document.getElementById('menuToggle').style.opacity = 1;
+    document.getElementById(currentLinkId + "1").style.color = '';
+    var url = document.getElementById('inputHuinput').value;
+    console.log('href' + document.getElementById(currentLinkId).href);
+    document.getElementById(currentLinkId).href = url;
+    console.log(document.getElementById("linkInputDiv").innerHTML);
+    document.getElementById("linkInputDiv").innerHTML = "";
+}
+
+function countOfRows(str) {
+    if (str.length > 200) return 6;
+    return 3;
+}
+
+function countOfLinkRows(str) {
+    if (str.length > 90) return 5;
+    if (str.length > 60) return 4;
+    if (str.length > 30) return 3;
+    return 2;
+}
+
+function onAClick(e) {
+    e.preventDefault();
+}
+
+

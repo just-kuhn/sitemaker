@@ -1,6 +1,6 @@
 class SitesController < ApplicationController
 
-  before_action :set_site, only: [:show, :edit, :update, :destroy]
+  before_action :set_site, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
 
   # GET /sites
   # GET /sites.json
@@ -64,14 +64,24 @@ class SitesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_site
-      @site = Site.find(params[:id])
-    end
+  def upvote
+    @site.upvote_from current_user
+    redirect_to sites_path
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def site_params
-      params.require(:site).permit(:title, :tags, :logo_url, :theme_id, :menu_id, :temp_id)
-    end
+  def downvote
+    @site.downvote_from current_user
+    redirect_to sites_path
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_site
+    @site = Site.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def site_params
+    params.require(:site).permit(:title, :tags, :logo_url, :theme_id, :menu_id, :temp_id)
+  end
 end
