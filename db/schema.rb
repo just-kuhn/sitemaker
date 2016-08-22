@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822010207) do
+ActiveRecord::Schema.define(version: 20160822073141) do
 
   create_table "maps", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "site_id"
@@ -29,14 +29,28 @@ ActiveRecord::Schema.define(version: 20160822010207) do
 
   create_table "sites", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
-    t.text     "tags",       limit: 65535
+    t.text     "tags",                    limit: 65535
     t.string   "logo_url"
     t.integer  "theme_id"
     t.integer  "menu_id"
     t.integer  "temp_id"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                                          null: false
+    t.datetime "updated_at",                                          null: false
     t.integer  "user_id"
+    t.integer  "cached_votes_total",                    default: 0
+    t.integer  "cached_votes_score",                    default: 0
+    t.integer  "cached_votes_up",                       default: 0
+    t.integer  "cached_votes_down",                     default: 0
+    t.integer  "cached_weighted_score",                 default: 0
+    t.integer  "cached_weighted_total",                 default: 0
+    t.float    "cached_weighted_average", limit: 24,    default: 0.0
+    t.index ["cached_votes_down"], name: "index_sites_on_cached_votes_down", using: :btree
+    t.index ["cached_votes_score"], name: "index_sites_on_cached_votes_score", using: :btree
+    t.index ["cached_votes_total"], name: "index_sites_on_cached_votes_total", using: :btree
+    t.index ["cached_votes_up"], name: "index_sites_on_cached_votes_up", using: :btree
+    t.index ["cached_weighted_average"], name: "index_sites_on_cached_weighted_average", using: :btree
+    t.index ["cached_weighted_score"], name: "index_sites_on_cached_weighted_score", using: :btree
+    t.index ["cached_weighted_total"], name: "index_sites_on_cached_weighted_total", using: :btree
     t.index ["menu_id"], name: "index_sites_on_menu_id", using: :btree
     t.index ["temp_id"], name: "index_sites_on_temp_id", using: :btree
     t.index ["theme_id"], name: "index_sites_on_theme_id", using: :btree
